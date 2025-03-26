@@ -59,4 +59,4 @@ EXPOSE 3000
 ENV PORT 3000
 
 # Start Next.js
-CMD ["node", "server.js"] 
+ENTRYPOINT ["node", "server.js"]

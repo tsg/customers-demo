@@ -1,7 +1,7 @@
 "use server";
 
 import type { Customer, Metrics, CountryMetric, RegionMetric } from "./types";
-import { Client, Pool } from "pg";
+import { Pool } from "pg";
 
 export async function getCustomerById(id: string): Promise<Customer | null> {
   const customers = await getCustomersFromDB();
@@ -59,17 +59,9 @@ export async function getCustomersFromDB(): Promise<Customer[]> {
       rejectUnauthorized: false, // Allow self-signed certificates
     };
   }
-  const client = new Client({
+  const pool = new Pool({
     connectionString: connectionString,
     ssl: sslConfig,
-  });
-
-  // Create a connection pool using the connection string
-  const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-      rejectUnauthorized: false,
-    },
   });
 
   try {

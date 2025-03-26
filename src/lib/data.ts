@@ -45,24 +45,30 @@ export async function getCustomerMetrics(): Promise<Metrics> {
   };
 }
 
-// New function to get customers directly from PostgreSQL database
-export async function getCustomersFromDB(): Promise<Customer[]> {
+// Create a function to get a database pool
+function getDbPool() {
   let connectionString = process.env.DATABASE_URL;
   if (!connectionString) {
     throw new Error("DATABASE_URL is not set");
   }
+
   let sslConfig = undefined;
   if (connectionString.includes("sslmode=require")) {
-    // Remove sslmode=require from connection string to avoid duplicate SSL config
     connectionString = connectionString.replace(/[\s;]?sslmode=require/g, "");
     sslConfig = {
-      rejectUnauthorized: false, // Allow self-signed certificates
+      rejectUnauthorized: false,
     };
   }
-  const pool = new Pool({
+
+  return new Pool({
     connectionString: connectionString,
     ssl: sslConfig,
   });
+}
+
+// Get customers from database using shared pool
+export async function getCustomersFromDB(): Promise<Customer[]> {
+  const pool = getDbPool();
 
   try {
     // Execute the query
@@ -86,7 +92,23 @@ export async function getCustomersFromDB(): Promise<Customer[]> {
     console.error("Error fetching customers from database:", error);
     throw error;
   } finally {
-    // Release the pool resources
+    await pool.end();
+  }
+}
+
+export async function deleteCustomerFromDB(customerId: string): Promise<void> {
+  const pool = getDbPool();
+
+  try {
+    // Delete related orders first to maintain referential integrity
+    await pool.query("DELETE FROM orders WHERE customer_id = $1", [customerId]);
+    await pool.query("DELETE FROM customers WHERE customer_id = $1", [
+      customerId,
+    ]);
+  } catch (error) {
+    console.error("Error deleting customer from database:", error);
+    throw error;
+  } finally {
     await pool.end();
   }
 }

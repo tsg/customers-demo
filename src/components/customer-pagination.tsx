@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useRouter, useSearchParams } from "next/navigation"
+import { useSearchParams } from "next/navigation";
 import {
   Pagination,
   PaginationContent,
@@ -9,25 +9,26 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination"
+} from "@/components/ui/pagination";
 
 interface CustomerPaginationProps {
-  totalCustomers: number
+  totalCustomers: number;
 }
 
-export function CustomerPagination({ totalCustomers }: CustomerPaginationProps) {
-  const router = useRouter()
-  const searchParams = useSearchParams()
+export function CustomerPagination({
+  totalCustomers,
+}: CustomerPaginationProps) {
+  const searchParams = useSearchParams();
 
-  const page = Number(searchParams.get("page") || "1")
-  const pageSize = 10
-  const totalPages = Math.ceil(totalCustomers / pageSize)
+  const page = Number(searchParams.get("page") || "1");
+  const pageSize = 10;
+  const totalPages = Math.ceil(totalCustomers / pageSize);
 
   const createPageURL = (pageNumber: number) => {
-    const params = new URLSearchParams(searchParams)
-    params.set("page", pageNumber.toString())
-    return `/customers?${params.toString()}`
-  }
+    const params = new URLSearchParams(searchParams);
+    params.set("page", pageNumber.toString());
+    return `/customers?${params.toString()}`;
+  };
 
   return (
     <Pagination>
@@ -39,14 +40,17 @@ export function CustomerPagination({ totalCustomers }: CustomerPaginationProps) 
         )}
 
         {[...Array(Math.min(totalPages, 5))].map((_, i) => {
-          const pageNumber = i + 1
+          const pageNumber = i + 1;
           return (
             <PaginationItem key={pageNumber}>
-              <PaginationLink href={createPageURL(pageNumber)} isActive={page === pageNumber}>
+              <PaginationLink
+                href={createPageURL(pageNumber)}
+                isActive={page === pageNumber}
+              >
                 {pageNumber}
               </PaginationLink>
             </PaginationItem>
-          )
+          );
         })}
 
         {totalPages > 5 && (
@@ -55,7 +59,9 @@ export function CustomerPagination({ totalCustomers }: CustomerPaginationProps) 
               <PaginationEllipsis />
             </PaginationItem>
             <PaginationItem>
-              <PaginationLink href={createPageURL(totalPages)}>{totalPages}</PaginationLink>
+              <PaginationLink href={createPageURL(totalPages)}>
+                {totalPages}
+              </PaginationLink>
             </PaginationItem>
           </>
         )}
@@ -67,6 +73,5 @@ export function CustomerPagination({ totalCustomers }: CustomerPaginationProps) 
         )}
       </PaginationContent>
     </Pagination>
-  )
+  );
 }
-

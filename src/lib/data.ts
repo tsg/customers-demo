@@ -1,7 +1,7 @@
 "use server";
 
 import type { Customer, Metrics, CountryMetric, RegionMetric } from "./types";
-import { Pool } from "pg";
+import { Client, Pool } from "pg";
 
 export async function getCustomerById(id: string): Promise<Customer | null> {
   const customers = await getCustomersFromDB();
@@ -47,6 +47,23 @@ export async function getCustomerMetrics(): Promise<Metrics> {
 
 // New function to get customers directly from PostgreSQL database
 export async function getCustomersFromDB(): Promise<Customer[]> {
+  let connectionString = process.env.DATABASE_URL;
+  if (!connectionString) {
+    throw new Error("DATABASE_URL is not set");
+  }
+  let sslConfig = undefined;
+  if (connectionString.includes("sslmode=require")) {
+    // Remove sslmode=require from connection string to avoid duplicate SSL config
+    connectionString = connectionString.replace(/[\s;]?sslmode=require/g, "");
+    sslConfig = {
+      rejectUnauthorized: false, // Allow self-signed certificates
+    };
+  }
+  const client = new Client({
+    connectionString: connectionString,
+    ssl: sslConfig,
+  });
+
   // Create a connection pool using the connection string
   const pool = new Pool({
     connectionString: process.env.DATABASE_URL,

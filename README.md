@@ -2,6 +2,8 @@
 
 This is a Next.js application that provides a modern dashboard interface for the well-known Northwind database. The dashboard allows you to view customer data from the classic sample database used for demos and tutorials.
 
+<img width="1634" alt="Screenshot 2025-03-26 at 12 03 19" src="https://github.com/user-attachments/assets/6a00cc8e-be52-4611-b51f-47142ad4a87c" />
+
 ## Getting Started
 
 ### Running Locally with pnpm:

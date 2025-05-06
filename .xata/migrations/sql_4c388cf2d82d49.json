@@ -1,0 +1,10 @@
+{
+  "name": "sql_4c388cf2d82d49",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY order_details\n    ADD CONSTRAINT pk_order_details PRIMARY KEY (order_id, product_id);"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "sql_9abebabcd397f9",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY categories\n    ADD CONSTRAINT pk_categories PRIMARY KEY (category_id);"
+      }
+    }
+  ]
+}

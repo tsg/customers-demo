@@ -1,0 +1,10 @@
+{
+  "name": "sql_b69fd63a3df3ad",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY employees\n    ADD CONSTRAINT pk_employees PRIMARY KEY (employee_id);"
+      }
+    }
+  ]
+}

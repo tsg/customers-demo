@@ -1,0 +1,10 @@
+{
+  "name": "sql_d8e9208196e319",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY order_details\n    ADD CONSTRAINT fk_order_details_products FOREIGN KEY (product_id) REFERENCES products;"
+      }
+    }
+  ]
+}

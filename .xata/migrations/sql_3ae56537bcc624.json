@@ -1,0 +1,10 @@
+{
+  "name": "sql_3ae56537bcc624",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY orders\n    ADD CONSTRAINT pk_orders PRIMARY KEY (order_id);"
+      }
+    }
+  ]
+}

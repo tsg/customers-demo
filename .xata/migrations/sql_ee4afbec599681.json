@@ -1,0 +1,10 @@
+{
+  "name": "sql_ee4afbec599681",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY customer_customer_demo\n    ADD CONSTRAINT fk_customer_customer_demo_customers FOREIGN KEY (customer_id) REFERENCES customers;"
+      }
+    }
+  ]
+}

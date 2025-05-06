@@ -1,0 +1,10 @@
+{
+  "name": "sql_4d292443da81b0",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY suppliers\n    ADD CONSTRAINT pk_suppliers PRIMARY KEY (supplier_id);"
+      }
+    }
+  ]
+}

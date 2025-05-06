@@ -1,0 +1,10 @@
+{
+  "name": "sql_141ec0ff7f2b64",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY territories\n    ADD CONSTRAINT fk_territories_region FOREIGN KEY (region_id) REFERENCES region;"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "sql_2dd215ea7ab4e1",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY region\n    ADD CONSTRAINT pk_region PRIMARY KEY (region_id);"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "sql_51b0b10f4096a1",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY us_states\n    ADD CONSTRAINT pk_usstates PRIMARY KEY (state_id);"
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "sql_5a26664196e0e7",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY customer_customer_demo\n    ADD CONSTRAINT pk_customer_customer_demo PRIMARY KEY (customer_id, customer_type_id);"
+      }
+    }
+  ]
+}

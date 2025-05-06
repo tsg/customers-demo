@@ -1,0 +1,10 @@
+{
+  "name": "sql_0b15616d032a42",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY employees\n    ADD CONSTRAINT fk_employees_employees FOREIGN KEY (reports_to) REFERENCES employees;"
+      }
+    }
+  ]
+}

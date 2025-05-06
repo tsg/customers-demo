@@ -1,0 +1,10 @@
+{
+  "name": "sql_4c7d2b921e19c6",
+  "operations": [
+    {
+      "sql": {
+        "up": "ALTER TABLE ONLY employee_territories\n    ADD CONSTRAINT fk_employee_territories_territories FOREIGN KEY (territory_id) REFERENCES territories;"
+      }
+    }
+  ]
+}
